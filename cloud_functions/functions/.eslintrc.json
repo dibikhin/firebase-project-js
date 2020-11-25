@@ -1,0 +1,82 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "script"
+  },
+  "plugins": [
+    "promise"
+  ],
+  "rules": {
+    "array-callback-return": "error",
+    "consistent-return": [
+      "error"
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "only-multiline",
+        "functions": "only-multiline",
+        "objects": "always"
+      }
+    ],
+    "for-direction": "error",
+    "indent": [
+      "error",
+      4
+    ],
+    "no-await-in-loop": "error",
+    "no-catch-shadow": "error",
+    "no-compare-neg-zero": "error",
+    "no-console": "off",
+    "no-extend-native": "error",
+    "no-implicit-coercion": "error",
+    "no-loop-func": "error",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-new-wrappers": "error",
+    "no-shadow": "error",
+    "no-shadow-restricted-names": "error",
+    "no-template-curly-in-string": "error",
+    "no-throw-literal": "error",
+    "no-unexpected-multiline": "error",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "no-unreachable": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-promise-reject-errors": "error",
+    "promise/always-return": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-nesting": "error",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never",
+      {
+        "beforeStatementContinuationChars": "always"
+      }
+    ],
+    "strict": [
+      "error",
+      "global"
+    ]
+  }
+}

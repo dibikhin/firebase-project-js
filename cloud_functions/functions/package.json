@@ -1,0 +1,29 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "date && firebase use my-project && firebase projects:list && firebase deploy --only functions:Firestore.A_Function && date",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "10"
+  },
+  "dependencies": {
+    "camelize": "^1.0.0",
+    "firebase-admin": "^9.1.1",
+    "firebase-functions": "^3.11.0",
+    "flat": "^5.0.2",
+    "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-promise": "^4.0.1"
+  },
+  "private": true
+}
