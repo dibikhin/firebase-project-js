@@ -43,8 +43,8 @@ async function runTests( // `async` is for explicit returning of Promise
         },
     },
 ) {
-    // WARN: don't bind the function to `/users` collection to prevent recursion
-    // caused by changes in this collection below
+    // WARN: don't bind the function to the `/users` collection to prevent recursion
+    // caused by changes in the collection below
 
     const userId = 'abcd1234'
 
@@ -62,12 +62,13 @@ async function runTests( // `async` is for explicit returning of Promise
         .limit(99)
     const usersQuerySnapshot = await Users.find(first99AdultsOrderedByAge)
     logger.info(
-        'users found:', usersQuerySnapshot.size,
+        'first99AdultsOrderedByAge - users found:', usersQuerySnapshot.size,
     )
     // `Users.first99AdultsOrderedByAge` is from `users_queries.js`
     const usersQuerySnapshot2 = await Users.find(Users.first99AdultsOrderedByAge)
+    // `usersQuerySnapshot.size` should be the same as `usersQuerySnapshot2.size`
     logger.info(
-        'users found:', usersQuerySnapshot2.size,
+        'Users.first99AdultsOrderedByAge - users found:', usersQuerySnapshot2.size,
     )
     const incrementAgeBy5 = { age: increment(5), }
     await Users.updateById(userId, incrementAgeBy5)
@@ -79,7 +80,7 @@ async function runTests( // `async` is for explicit returning of Promise
     await Users.deleteById(userId)
     const userSnapDeleted = await Users.getById(userId)
     logger.info(
-        'deleted user exists:', userSnapDeleted.exists,
+        'deleted user exists:', userSnapDeleted.exists, // should be `false`
     )
     // NOTE: awaited results are ignored because fire-and-forget works for Firestore
     // in general. Firestore client handles a lot by itself by using `grpc`

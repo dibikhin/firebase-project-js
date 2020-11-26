@@ -6,7 +6,7 @@
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "date && firebase use letsopen-co && firebase projects:list && firebase deploy --only functions:Firestore.aTestCollection_onUpdate_aFunction && date",
+    "deploy": "date && firebase use my-project && firebase projects:list && firebase deploy --only functions:Firestore.aTestCollection_onUpdate_aFunction && date",
     "logs": "firebase functions:log"
   },
   "engines": {
