@@ -11,7 +11,7 @@ const {
 const wireFunctionGroup = require('../infra/cloud_functions/wire_function_group')
 const initAppCtx = require('./context_bootstrapper')
 
-const FirestoreRaw = require('../../functions/firestore')
+const FirestoreRaw = require('../../firestore')
 
 // Explicit global state
 const globalState = {
@@ -26,7 +26,7 @@ function initApp({
     appCtxForTests, // `null` by default
 }) {
     // Naive lazy initialization preventing accidental multiple app's initialization
-    globalState.app = lazyInit({ target: globalState.app, initTarget: firebaseAdmin.initializeApp, })
+    globalState.app = lazyInit({ target: globalState.app, initTarget: firebaseAdmin.initializeApp.bind(firebaseAdmin), })
     globalState.db = lazyInit({ target: globalState.db, initTarget: firebaseAdmin.firestore, })
 
     // Initialize app context

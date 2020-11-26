@@ -9,14 +9,13 @@ const util = require('util')
 const {
     toDoc,
     increment,
-} = require('../../../../lib/firestore_extensions/helpers')
+} = require('../../../lib/firestore_extensions/helpers')
 
 const {
     Fields,
-} = require('../../../../lib/domain/constants')
+} = require('../../../lib/domain/constants')
 
 function aFunction(change, context, { appCtx, logger, }) {
-
     // TODO check args
     // TODO check async
 
@@ -33,8 +32,10 @@ function aFunction(change, context, { appCtx, logger, }) {
         })
 }
 
-// `async` is for explicit returning of Promise
-async function runTests(
+/**
+ * Firestore.aTestCollection_onUpdate_aFunction
+ */
+async function runTests( // `async` is for explicit returning of Promise
     logger,
     {
         Dal: {

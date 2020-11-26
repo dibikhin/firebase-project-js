@@ -68,7 +68,7 @@ async function deleteById(db, colName, docId) {
  * and not to forget to call `.get()` in the end
  */
 // @ts-ignore
-async function find(_, _, query) {
+async function find(_, __, query) {
     return is(Function, query)
         ? query().get() // for queries from injected modules, e.g. from `users_queries.js`
         : query.get() // for in-place declared queries, see `a_function.js`

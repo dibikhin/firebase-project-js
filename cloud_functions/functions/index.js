@@ -11,7 +11,7 @@
 const firebaseFunctions = require('firebase-functions')
 const firebaseAdmin = require('firebase-admin')
 
-const initApp = require('../lib/app_infra/app_bootstrapper')
+const initApp = require('./lib/app_infra/app_bootstrapper')
 
 const {
     Firestore,
@@ -21,6 +21,10 @@ const {
     logger: firebaseFunctions.logger,
     appCtxForTests: null,
 })
+
+// TypeError: Cannot read property 'INTERNAL' of undefined
+
+firebaseFunctions.logger.info('Firestore', Firestore)
 
 // Exporting the function groups
 module.exports = {

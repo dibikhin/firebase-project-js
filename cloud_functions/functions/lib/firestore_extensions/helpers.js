@@ -6,7 +6,7 @@
 
 'use strict'
 
-const admin = require('../../functions/node_modules/firebase-admin')
+const admin = require('firebase-admin')
 
 const toDoc = (snap) => Object.freeze({
     ...snap.data(),

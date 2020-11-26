@@ -27,7 +27,7 @@ function wireFunctionGroup({ aModule, source, firebaseFunctions, }) {
 function toCloudFunction({ firebaseFunctions, source, }) {
     // like `firebaseFunctions.firestore.document('aTestCollection/{docId}').onUpdate(aTestCollection_onUpdate_DoSomething)`
     // Function -> CloudFunction
-    return (fn) => firebaseFunctions[source].document(`${fn.colName}/{docId}`)[fn.trigger](fn)
+    return (fn) => firebaseFunctions['firestore'].document(`aTestCollection/{docId}`)['onUpdate'](fn)
 }
 
 module.exports = wireFunctionGroup
