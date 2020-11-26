@@ -7,7 +7,7 @@
 'use strict'
 
 const {
-    map,
+    mapObjIndexed,
 } = require('ramda')
 
 /**
@@ -18,19 +18,23 @@ const {
  * @returns {Object} Wired function group
  */
 function wireFunctionGroup({ aModule, source, firebaseFunctions, }) {
-    return map(
+    return mapObjIndexed(
         toCloudFunction({ firebaseFunctions, source, }),
         aModule,
     )
 }
 
 function toCloudFunction({ firebaseFunctions, source, }) {
-    // like `firebaseFunctions.firestore
+    // like `firebaseFunctions
+    //         .firestore
     //         .document('aTestCollection/{docId}')
-    //         .onUpdate(aTestCollection_onUpdate_DoSomething)`
+    //         .onUpdate(aTestCollection_onUpdate_aFunction)`
 
-    // Function -> CloudFunction
-    return (fn) => firebaseFunctions[source].document(`${fn.colName}/{docId}`)[fn.trigger](fn)
+    // Function -> String -> CloudFunction
+    return (fn, fnName) => {
+        const [colName, triggerName] = fnName.split('_')
+        return firebaseFunctions[source].document(`${colName}/{docId}`)[triggerName](fn)
+    }
 }
 
 module.exports = wireFunctionGroup
