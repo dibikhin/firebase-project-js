@@ -1,6 +1,6 @@
 /**
  * @module Infra.Common.DependencyInjection
- * 
+ *
  * A naive DI using FP
  */
 
@@ -17,7 +17,7 @@ const {
  */
 
 /**
- * @param {Object} params 
+ * @param {Object} params
  * @param {Function} params.aFunction
  * @param {Array} params.deps
  * @returns {Function} Injected function
@@ -27,7 +27,7 @@ function injectToFunction({ aFunction, deps, }) {
 }
 
 /**
- * @param {Object} params 
+ * @param {Object} params
  * @param {Function} params.aFunction
  * @param {Array} params.deps
  * @returns {Function} Injected function
@@ -41,7 +41,7 @@ function injectToFunctionRight({ aFunction, deps, }) {
  */
 
 /**
- * @param {Object} params 
+ * @param {Object} params
  * @param {Object} params.aModule
  * @param {Array} params.deps
  * @returns {Object} Injected module
@@ -54,7 +54,7 @@ function injectToModule({ aModule, deps, }) {
 }
 
 /**
- * @param {Object} params 
+ * @param {Object} params
  * @param {Object} params.aModule
  * @param {Array} params.deps
  * @returns {Object} Injected module

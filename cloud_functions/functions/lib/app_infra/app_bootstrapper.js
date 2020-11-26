@@ -26,8 +26,13 @@ function initApp({
     appCtxForTests, // `null` by default
 }) {
     // Naive lazy initialization preventing accidental multiple app's initialization
-    globalState.app = lazyInit({ target: globalState.app, initTarget: firebaseAdmin.initializeApp.bind(firebaseAdmin), })
-    globalState.db = lazyInit({ target: globalState.db, initTarget: firebaseAdmin.firestore, })
+    globalState.app = lazyInit({
+        // `bind` to prevent 'TypeError: Cannot read property 'INTERNAL' of undefined'
+        target: globalState.app, initTarget: firebaseAdmin.initializeApp.bind(firebaseAdmin),
+    })
+    globalState.db = lazyInit({
+        target: globalState.db, initTarget: firebaseAdmin.firestore,
+    })
 
     // Initialize app context
     const appCtx = lazyInit({
@@ -38,7 +43,7 @@ function initApp({
     // Inject app context to functions for Firestore triggers
     const FirestoreInjected = injectToModuleRight({
         aModule: FirestoreRaw,
-        deps: [{ logger, appCtx, },],
+        deps: [{ logger, appCtx, }],
     })
 
     // Final set up of the function group

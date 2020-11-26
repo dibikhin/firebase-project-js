@@ -1,6 +1,6 @@
 /**
  * @module Infra.Common.LazyInit
- * 
+ *
  * A naive lazy initialization
  */
 

@@ -1,6 +1,6 @@
 /**
  * @module FirestoreExtensions.GenericRepository
- * 
+ *
  * The Repository pattern = CRUD + `find()` + collection/document references
  */
 

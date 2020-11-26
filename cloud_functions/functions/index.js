@@ -11,6 +11,8 @@
 const firebaseFunctions = require('firebase-functions')
 const firebaseAdmin = require('firebase-admin')
 
+// The `lib` folder is there to prevent
+// the `"code":3,"message":"Function failed on loading user code. ...` error
 const initApp = require('./lib/app_infra/app_bootstrapper')
 
 const {
@@ -21,10 +23,6 @@ const {
     logger: firebaseFunctions.logger,
     appCtxForTests: null,
 })
-
-// TypeError: Cannot read property 'INTERNAL' of undefined
-
-firebaseFunctions.logger.info('Firestore', Firestore)
 
 // Exporting the function groups
 module.exports = {

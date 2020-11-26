@@ -1,6 +1,6 @@
 /**
  * @module FirestoreExtensions.Helpers
- * 
+ *
  * Useful shortcuts for Firestore
  */
 
@@ -11,7 +11,8 @@ const admin = require('firebase-admin')
 const toDoc = (snap) => Object.freeze({
     ...snap.data(),
     id: snap.id,
-    ref: snap.ref,
+    // ref: snap.ref, // for shorter logs
+    // path: snap.ref.path,
 })
 
 const {

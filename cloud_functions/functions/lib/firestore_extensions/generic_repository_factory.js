@@ -12,17 +12,19 @@ const {
     injectToModule,
 } = require('../infra/common/di')
 
-function makeRepository({ db, repository, queries, colName, }) {
+function makeRepository({
+    db, repository, queries, colName,
+}) {
     const injectedRepo = injectToModule({
         aModule: repository,
-        deps: [db, colName,],
+        deps: [db, colName],
     })
     // NOTE: `colRef` is needed for running queries like in `db.collection('...').where(...)`
     const colRef = injectedRepo.colRef()
 
     const injectedQueries = injectToModule({
         aModule: defaultTo({}, queries),
-        deps: [colRef,],
+        deps: [colRef],
     })
     // NOTE: frequently used ones for querying
     const queryFns = bindQueryFunctions({ colRef, })
