@@ -8,12 +8,19 @@
 
 const admin = require('firebase-admin')
 
-const toDoc = (snap) => Object.freeze({
-    ...snap.data(),
-    id: snap.id,
-    // ref: snap.ref, // for shorter logs
-    // path: snap.ref.path,
-})
+const toDoc = (snap) => {
+    const data = snap.data()
+    const createdAtStrWrapper = data.createdAt ? { createdAtStr: data.createdAt.toDate(), } : {}
+    const updatedAtStrWrapper = data.updatedAt ? { updatedAtStr: data.updatedAt.toDate(), } : {}
+    return Object.freeze({
+        ...data,
+        id: snap.id,
+        ...createdAtStrWrapper,
+        ...updatedAtStrWrapper,
+        // ref: snap.ref, // for shorter logs
+        // path: snap.ref.path,
+    })
+}
 
 const {
     Timestamp,
@@ -30,8 +37,8 @@ const decrement = (x) => FieldValue.increment(-x)
 // eslint-disable-next-line no-underscore-dangle
 const _delete = FieldValue.delete
 
-const createdAtUtc = FieldValue.serverTimestamp()
-const updatedAtUtc = FieldValue.serverTimestamp()
+const createdAt = FieldValue.serverTimestamp()
+const updatedAt = FieldValue.serverTimestamp()
 
 module.exports = Object.freeze({
     Timestamp,
@@ -46,10 +53,10 @@ module.exports = Object.freeze({
 
     delete: _delete,
 
-    createdAtUtc,
-    updatedAtUtc,
+    createdAt,
+    updatedAt,
     timestamps: {
-        createdAtUtc,
-        updatedAtUtc,
+        createdAt,
+        updatedAt,
     },
 })

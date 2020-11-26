@@ -11,7 +11,7 @@ const {
 } = require('ramda')
 
 const {
-    updatedAtUtc,
+    updatedAt,
     timestamps,
 } = require('./helpers')
 
@@ -55,7 +55,7 @@ async function updateById(db, colName, docId, diff) {
     return docRef(db, colName, docId)
         .update({
             ...diff,
-            updatedAtUtc,
+            updatedAt,
         })
 }
 
