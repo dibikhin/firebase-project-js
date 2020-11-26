@@ -24,15 +24,13 @@ function wireFunctionGroup({ aModule, source, firebaseFunctions, }) {
     )
 }
 
-// eslint-disable-next-line
 function toCloudFunction({ firebaseFunctions, source, }) {
     // like `firebaseFunctions.firestore
     //         .document('aTestCollection/{docId}')
     //         .onUpdate(aTestCollection_onUpdate_DoSomething)`
-    // Function -> CloudFunction
 
-    // eslint-disable-next-line
-    return (fn) => firebaseFunctions['firestore'].document(`aTestCollection/{docId}`)['onUpdate'](fn)
+    // Function -> CloudFunction
+    return (fn) => firebaseFunctions[source].document(`${fn.colName}/{docId}`)[fn.trigger](fn)
 }
 
 module.exports = wireFunctionGroup

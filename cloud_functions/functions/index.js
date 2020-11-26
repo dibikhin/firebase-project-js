@@ -11,8 +11,8 @@
 const firebaseFunctions = require('firebase-functions')
 const firebaseAdmin = require('firebase-admin')
 
-// The `lib` folder is there to prevent
-// the `"code":3,"message":"Function failed on loading user code. ...` error
+// The `lib` folder is there to prevent the
+// `"code":3,"message":"Function failed on loading user code. ...` error
 const initApp = require('./lib/app_infra/app_bootstrapper')
 
 const {
