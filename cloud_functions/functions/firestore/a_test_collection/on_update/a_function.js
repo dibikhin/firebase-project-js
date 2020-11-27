@@ -34,11 +34,15 @@ function aFunction(change, context, { appCtx, logger, }) {
 
 /**
  * Firestore.aTestCollection_onUpdate_aFunction
+ *
+ * @param {Object} logger
+ * @param {Object} appCtx
+ * @returns {Promise}
  */
 async function runTests( // `async` is for explicit returning of Promise
     logger,
     {
-        Dal: {
+        DAL: {
             UsersRepo: Users,
         },
     },

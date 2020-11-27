@@ -10,6 +10,7 @@ const {
     map,
     partial,
     partialRight,
+    mapObjIndexed,
 } = require('ramda')
 
 /*
@@ -19,21 +20,21 @@ const {
 /**
  * @param {Object} params
  * @param {Function} params.aFunction
- * @param {Array} params.deps
+ * @param {Array} params.dependencies
  * @returns {Function} Injected function
  */
-function injectToFunction({ aFunction, deps, }) {
-    return partial(aFunction, deps)
+function injectToFunction({ aFunction, dependencies, }) {
+    return partial(aFunction, dependencies)
 }
 
 /**
  * @param {Object} params
  * @param {Function} params.aFunction
- * @param {Array} params.deps
+ * @param {Array} params.dependencies
  * @returns {Function} Injected function
  */
-function injectToFunctionRight({ aFunction, deps, }) {
-    return partialRight(aFunction, deps)
+function injectToFunctionRight({ aFunction, dependencies, }) {
+    return partialRight(aFunction, dependencies)
 }
 
 /*
@@ -43,12 +44,12 @@ function injectToFunctionRight({ aFunction, deps, }) {
 /**
  * @param {Object} params
  * @param {Object} params.aModule
- * @param {Array} params.deps
+ * @param {Array} params.dependencies
  * @returns {Object} Injected module
  */
-function injectToModule({ aModule, deps, }) {
+function injectToModule({ aModule, dependencies, }) {
     return map(
-        (fn) => partial(fn, deps),
+        (fn) => partial(fn, dependencies),
         aModule,
     )
 }
@@ -56,12 +57,23 @@ function injectToModule({ aModule, deps, }) {
 /**
  * @param {Object} params
  * @param {Object} params.aModule
- * @param {Array} params.deps
+ * @param {Array} params.dependencies
  * @returns {Object} Injected module
  */
-function injectToModuleRight({ aModule, deps, }) {
+function injectToModuleRight({ aModule, dependencies, }) {
     return map(
-        (fn) => partialRight(fn, deps),
+        (fn) => partialRight(fn, dependencies),
+        aModule,
+    )
+}
+
+function wrapFunctions({ aModule, wrappers, }) {
+    return mapObjIndexed(
+        (fn, fnName) => {
+            const [, triggerName] = fnName.split('_')
+            const wrapper = wrappers[triggerName]
+            return partialRight(wrapper, [fn])
+        },
         aModule,
     )
 }
@@ -69,6 +81,9 @@ function injectToModuleRight({ aModule, deps, }) {
 module.exports = Object.freeze({
     injectToFunction,
     injectToFunctionRight,
+
     injectToModule,
     injectToModuleRight,
+
+    wrapFunctions,
 })

@@ -1,5 +1,5 @@
 /**
- * @module Infra.Dal.UsersQueries
+ * @module Infra.DAL.Queries.UsersQueries
  *
  * Queries to run with `await RepoImpl.find(RepoImpl.aQuery)`
  */
@@ -8,7 +8,7 @@
 
 const {
     Fields,
-} = require('../domain/constants')
+} = require('../../domain/constants')
 
 function firstOne(colRef) {
     return colRef

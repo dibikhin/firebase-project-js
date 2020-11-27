@@ -14,7 +14,7 @@ module.exports = Object.freeze({
         users: {
             age: 'age',
             /** @deprecated */
-            friendsQty: 'friendsQty',
+            state: 'state',
         },
     },
 })

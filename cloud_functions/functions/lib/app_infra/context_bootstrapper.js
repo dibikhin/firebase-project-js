@@ -6,7 +6,7 @@
 
 const genericRepository = require('../firestore_extensions/generic_repository')
 const makeRepository = require('../firestore_extensions/generic_repository_factory')
-const usersQueries = require('../dal/users_queries')
+const usersQueries = require('../dal/queries/users_queries')
 const makeAppContext = require('./context_factory')
 const {
     Collections,
@@ -22,7 +22,7 @@ function initAppCtx({
         colName: Collections.users,
     })
     const appCtx = makeAppContext({
-        dal: {
+        DAL: {
             UsersRepo,
         },
     })

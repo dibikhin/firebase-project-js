@@ -8,7 +8,7 @@ const camelize = require('camelize')
 const flatten = require('flat')
 const aFunction = require('./a_test_collection/on_update/a_function')
 
-// {...} -> { aTestCollection_onUpdate_aFunction: fn }
+// { { { ... } } } -> { aTestCollection_onUpdate_aFunction: fn }
 const Firestore = flatten(
     camelize({
         a_test_collection: {

@@ -17,14 +17,14 @@ function makeRepository({
 }) {
     const injectedRepo = injectToModule({
         aModule: repository,
-        deps: [db, colName],
+        dependencies: [db, colName],
     })
     // NOTE: `colRef` is needed for running queries like in `db.collection('...').where(...)`
     const colRef = injectedRepo.colRef()
 
     const injectedQueries = injectToModule({
         aModule: defaultTo({}, queries),
-        deps: [colRef],
+        dependencies: [colRef],
     })
     // NOTE: frequently used ones for querying
     const queryFns = bindQueryFunctions({ colRef, })
