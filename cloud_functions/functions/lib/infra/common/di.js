@@ -67,6 +67,12 @@ function injectToModuleRight({ aModule, dependencies, }) {
     )
 }
 
+/**
+ * @param {Object} params
+ * @param {Object} params.aModule
+ * @param {Array} params.wrappers error handlers by triggers
+ * @returns {Object} Module with wrapped functions
+ */
 function wrapFunctions({ aModule, wrappers, }) {
     return mapObjIndexed(
         (fn, fnName) => {
