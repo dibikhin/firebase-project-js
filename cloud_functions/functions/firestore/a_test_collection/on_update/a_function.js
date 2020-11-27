@@ -4,8 +4,6 @@
 
 'use strict'
 
-const util = require('util')
-
 const {
     toDoc,
     increment,
@@ -15,23 +13,6 @@ const {
     Fields,
 } = require('../../../lib/domain/constants')
 
-function aFunction(change, context, { appCtx, logger, }) {
-    // TODO check args
-    // TODO check async
-
-    logger.info(
-        'context:', context,
-        'change.before:', toDoc(change.before),
-        'change.after:', toDoc(change.after),
-    )
-    // terminate properly by https://firebase.google.com/docs/functions/terminate-functions
-    return runTests(logger, appCtx) // return Promise
-        .catch((err) => {
-            logger.error(util.inspect(err, { depth: 5, }))
-            return null // explicit return
-        })
-}
-
 /**
  * Firestore.aTestCollection_onUpdate_aFunction
  *
@@ -39,7 +20,7 @@ function aFunction(change, context, { appCtx, logger, }) {
  * @param {Object} appCtx
  * @returns {Promise}
  */
-async function runTests( // `async` is for explicit returning of Promise
+async function aFunction( // `async` is for explicit returning of Promise
     logger,
     {
         DAL: {
