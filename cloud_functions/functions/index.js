@@ -1,7 +1,7 @@
 /**
  * Entry point
  *
- * Bootstrap your cloud functions for different triggers (HTTP, Auth, Firestore, etc.)
+ * Bootstrap your cloud functions for different triggers (HTTPS, Auth, Firestore, etc.)
  * and export them to be run by Firebase infrastructure (Cloud Functions for Firebase
  * on Google Cloud - https://firebase.google.com/docs/functions)
  */

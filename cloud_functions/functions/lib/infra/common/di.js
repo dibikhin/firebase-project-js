@@ -68,16 +68,18 @@ function injectToModuleRight({ aModule, dependencies, }) {
 }
 
 /**
+ * Wrap functions in the module with the error handlers
+ *
  * @param {Object} params
  * @param {Object} params.aModule
- * @param {Array} params.wrappers error handlers by triggers
+ * @param {Object} params.functionsWrappers error handlers by triggers
  * @returns {Object} Module with wrapped functions
  */
-function wrapFunctions({ aModule, wrappers, }) {
+function wrapFunctions({ aModule, functionsWrappers, }) {
     return mapObjIndexed(
         (fn, fnName) => {
             const [, triggerName] = fnName.split('_')
-            const wrapper = wrappers[triggerName]
+            const wrapper = functionsWrappers[triggerName]
             return partialRight(wrapper, [fn])
         },
         aModule,

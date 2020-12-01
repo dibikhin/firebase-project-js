@@ -5,20 +5,11 @@
 'use strict'
 
 const lazyInit = require('../infra/common/lazyInit')
-const {
-    injectToModuleRight,
-    wrapFunctions,
-} = require('../infra/common/di')
-const wireFunctionGroup = require('../infra/cloud_functions/wire_function_group')
-const wrappers = require('../infra/cloud_functions/wrappers')
-const initAppCtx = require('./context_bootstrapper')
-
-const FirestoreRaw = require('../../firestore')
+const makeApp = require('./app_factory')
 
 // Explicit global state
-const globalState = {
-    app: null,
-    db: null,
+const FunctionsGroups = {
+    Firestore: null,
 }
 
 function initApp({
@@ -28,39 +19,13 @@ function initApp({
     appCtxForTests, // `null` by default
 }) {
     // Naive lazy initialization preventing accidental multiple app's initialization
-    globalState.app = lazyInit({
-        // `bind` to prevent 'TypeError: Cannot read property 'INTERNAL' of undefined'
-        target: globalState.app, initTarget: firebaseAdmin.initializeApp.bind(firebaseAdmin),
+    FunctionsGroups.Firestore = lazyInit({
+        target: FunctionsGroups.Firestore,
+        initTarget: () => makeApp({
+            firebaseAdmin, firebaseFunctions, logger, appCtxForTests,
+        }),
     })
-    globalState.db = lazyInit({
-        target: globalState.db, initTarget: firebaseAdmin.firestore,
-    })
-
-    // Initialize app context
-    const appCtx = lazyInit({
-        target: appCtxForTests,
-        initTarget: () => initAppCtx(globalState),
-    })
-
-    // Wrap functions with centralized error handlers
-    const FirestoreWrapped = wrapFunctions({
-        aModule: FirestoreRaw,
-        wrappers,
-    })
-
-    // Inject app context to functions for Firestore triggers
-    const FirestoreInjected = injectToModuleRight({
-        aModule: FirestoreWrapped,
-        dependencies: [{ logger, appCtx, }],
-    })
-
-    // Final set up of the function group
-    const Firestore = wireFunctionGroup({
-        firebaseFunctions, aModule: FirestoreInjected, source: 'firestore',
-    })
-    return {
-        Firestore,
-    }
+    return FunctionsGroups
 }
 
 module.exports = initApp

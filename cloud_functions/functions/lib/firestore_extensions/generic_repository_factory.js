@@ -13,7 +13,10 @@ const {
 } = require('../infra/common/di')
 
 function makeRepository({
-    db, repository, queries, colName,
+    db,
+    repository,
+    queries, // nullable
+    colName,
 }) {
     const injectedRepo = injectToModule({
         aModule: repository,
