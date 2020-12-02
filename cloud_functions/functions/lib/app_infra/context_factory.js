@@ -5,10 +5,10 @@
 'use strict'
 
 function makeAppContext({
-    DAL,
+    Repos,
 }) {
     return Object.freeze({
-        DAL,
+        Repos,
     })
 }
 

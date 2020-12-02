@@ -14,7 +14,9 @@ const {
 } = require('../../../lib/domain/constants')
 
 /**
- * Firestore.aTestCollection_onUpdate_aFunction
+ * Runs the Users' Repository tests - CRUD + find()
+ *
+ * Function name to deploy - Firestore.aTestCollection_onUpdate_aFunction
  *
  * @param {Object} logger
  * @param {Object} appCtx
@@ -23,7 +25,7 @@ const {
 async function aFunction( // `async` is for explicit returning of Promise
     logger,
     {
-        DAL: {
+        Repos: {
             UsersRepo: Users,
         },
     },

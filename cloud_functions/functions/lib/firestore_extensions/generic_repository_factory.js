@@ -12,6 +12,9 @@ const {
     injectToModule,
 } = require('../infra/common/di')
 
+/**
+ * Make a repository for the specific collection using a generic repository
+ */
 function makeRepository({
     db,
     repository,

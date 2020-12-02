@@ -10,6 +10,8 @@ const admin = require('firebase-admin')
 
 const toDoc = (snap) => {
     const data = snap.data()
+
+    // It's needed because FirebaseFirestore.Timestamp is logged messy due to it's an Object
     const createdAtStrWrapper = data.createdAt ? { createdAtStr: data.createdAt.toDate(), } : {}
     const updatedAtStrWrapper = data.updatedAt ? { updatedAtStr: data.updatedAt.toDate(), } : {}
     return Object.freeze({

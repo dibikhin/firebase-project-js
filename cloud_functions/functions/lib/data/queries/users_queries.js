@@ -1,5 +1,5 @@
 /**
- * @module Infra.DAL.Queries.UsersQueries
+ * @module Data.Queries.UsersQueries
  *
  * Queries to run with `await RepoImpl.find(RepoImpl.aQuery)`
  */

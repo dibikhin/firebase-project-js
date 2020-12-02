@@ -1,7 +1,7 @@
 /**
- * @module Infra.Common.LazyInit
+ * @module Infra.Common.Singleton
  *
- * A naive lazy initialization
+ * A naive only once initialization
  */
 
 'use strict'
@@ -12,8 +12,8 @@
  * @param {Object} params.target
  * @returns {Object}
  */
-function lazyInit({ initTarget, target, }) {
+function initOnce({ initTarget, target, }) {
     return target || initTarget()
 }
 
-module.exports = lazyInit
+module.exports = initOnce

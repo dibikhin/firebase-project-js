@@ -4,28 +4,52 @@
 
 'use strict'
 
-const lazyInit = require('../infra/common/lazyInit')
-const makeApp = require('./app_factory')
+const initOnce = require('../infra/common/init_once')
+const {
+    injectToModuleRight,
+    wrapFunctions,
+} = require('../infra/common/di')
 
-// Explicit global state
-const FunctionsGroups = {
-    Firestore: null,
-}
+const wireFunctionGroup = require('../infra/cloud_functions/wire_function_group')
+const functionsWrappers = require('../infra/cloud_functions/functions_wrappers')
 
-function initApp({
-    firebaseFunctions,
-    firebaseAdmin,
-    logger,
-    appCtxForTests, // `null` by default
+const initAppCtx = require('./context_bootstrapper')
+
+const FirestoreRaw = require('../../firestore')
+
+/**
+ * Bootstraps the app step by step
+ */
+function bootstrapApp({
+    firebaseAdmin, firebaseFunctions, logger, appCtxForTests,
 }) {
-    // Naive lazy initialization preventing accidental multiple app's initialization
-    FunctionsGroups.Firestore = lazyInit({
-        target: FunctionsGroups.Firestore,
-        initTarget: () => makeApp({
-            firebaseAdmin, firebaseFunctions, logger, appCtxForTests,
-        }),
+    // `bind` to prevent 'TypeError: Cannot read property 'INTERNAL' of undefined'
+    firebaseAdmin.initializeApp.bind(firebaseAdmin)()
+    const db = firebaseAdmin.firestore()
+
+    // Initialize app context
+    const appCtx = initOnce({
+        target: appCtxForTests,
+        initTarget: () => initAppCtx({ db, }),
     })
-    return FunctionsGroups
+
+    // Wrap functions with centralized error handlers
+    const FirestoreWrapped = wrapFunctions({
+        aModule: FirestoreRaw,
+        functionsWrappers,
+    })
+
+    // Inject app context to functions for Firestore triggers
+    const FirestoreInjected = injectToModuleRight({
+        aModule: FirestoreWrapped,
+        dependencies: [{ logger, appCtx, }],
+    })
+
+    // Final set up of the function group
+    const Firestore = wireFunctionGroup({
+        firebaseFunctions, aModule: FirestoreInjected, source: 'firestore',
+    })
+    return Firestore
 }
 
-module.exports = initApp
+module.exports = bootstrapApp
