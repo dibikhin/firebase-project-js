@@ -8,12 +8,14 @@
 
 const util = require('util')
 
+const { isAsyncOrThrow, } = require('../common/helpers')
+
 const {
     toDoc,
 } = require('../../firestore_extensions/helpers')
 
 function onCreate(snap, context, { appCtx, logger, }, fn) {
-    // TODO check async
+    isAsyncOrThrow(fn)
 
     logger.info(
         'context:', context,
@@ -28,7 +30,7 @@ function onCreate(snap, context, { appCtx, logger, }, fn) {
 }
 
 function onUpdate(change, context, { appCtx, logger, }, fn) {
-    // TODO check async
+    isAsyncOrThrow(fn)
 
     logger.info(
         'context:', context,

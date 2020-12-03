@@ -1,5 +1,5 @@
 /**
- * @module Infra.Common.Singleton
+ * @module Infra.Common.InitOnce
  *
  * A naive only once initialization
  */

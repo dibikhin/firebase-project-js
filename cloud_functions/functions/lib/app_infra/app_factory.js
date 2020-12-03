@@ -1,5 +1,8 @@
 /**
  * @module Infra.App.Bootstrapper
+ *
+ * It's a Singleton for `FunctionsGroups`. So, multiple calls to `makeApp()`
+ * don't lead to multiple underlying Firebase apps.
  */
 
 'use strict'
@@ -14,7 +17,7 @@ const FunctionsGroups = {
 
 /**
  * Initializes function groups for the app only once
- * (the Firestore function group only at the moment)
+ * (the Firestore function group at the moment)
  */
 function makeApp({
     firebaseFunctions,

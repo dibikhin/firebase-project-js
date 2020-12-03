@@ -1,7 +1,5 @@
 /**
  * @module Infra.CloudFunctions.WireFunctionGroup
- *
- * Wire cloud functions from a module to a trigger in a specific collection
  */
 
 'use strict'
@@ -11,6 +9,9 @@ const {
 } = require('ramda')
 
 /**
+ * Turns functions of a module to Cloud Functions by wiring them
+ * to triggers for collections.
+ *
  * @param {Object} params
  * @param {Object} params.aModule
  * @param {String} params.source

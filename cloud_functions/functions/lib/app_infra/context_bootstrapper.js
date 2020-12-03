@@ -15,7 +15,7 @@ const {
 } = require('../domain/constants')
 
 /**
- * Initializes app context to be injected in the cloud functions
+ * Initializes app context to be injected to the cloud functions
  */
 function initAppCtx({
     db,

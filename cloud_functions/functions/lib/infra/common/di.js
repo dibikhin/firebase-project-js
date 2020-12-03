@@ -68,7 +68,7 @@ function injectToModuleRight({ aModule, dependencies, }) {
 }
 
 /**
- * Wrap functions in the module with the error handlers
+ * Wraps functions in the module with the error handlers
  *
  * @param {Object} params
  * @param {Object} params.aModule

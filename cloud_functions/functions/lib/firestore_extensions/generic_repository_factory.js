@@ -13,7 +13,7 @@ const {
 } = require('../infra/common/di')
 
 /**
- * Make a repository for the specific collection using a generic repository
+ * Makes a repository for a specific collection using a generic repository
  */
 function makeRepository({
     db,
