@@ -50,6 +50,7 @@ async function testUsersRepository({ Users, logger, }) {
     logger.info(
         'user:', toDoc(userSnap)
     )
+
     // An in-place query
     const first99AdultsOrderedByAge = Users
         .where(Fields.users.age, '>=', 21)
@@ -65,6 +66,7 @@ async function testUsersRepository({ Users, logger, }) {
     logger.info(
         'Users.first99AdultsOrderedByAge - users found:', usersQuerySnapshot2.size
     )
+
     const incrementAgeBy5 = { age: increment(5), }
     await Users.updateById(userId, incrementAgeBy5)
 
@@ -72,6 +74,7 @@ async function testUsersRepository({ Users, logger, }) {
     logger.info(
         'updated user:', toDoc(userSnapUpdated)
     )
+
     await Users.deleteById(userId)
     const userSnapDeleted = await Users.getById(userId)
     logger.info(

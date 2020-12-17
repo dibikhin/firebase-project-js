@@ -20,7 +20,7 @@ const {
 function initAppCtx({
     db,
 }) {
-    const UsersRepo = makeRepository({
+    const Users = makeRepository({
         db,
         repository: genericRepository,
         queries: usersQueries, // NOTE: pass `null` if no queries yet
@@ -28,7 +28,7 @@ function initAppCtx({
     })
     const appCtx = makeAppContext({
         Repos: {
-            Users: UsersRepo,
+            Users,
         },
     })
     return appCtx
