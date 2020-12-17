@@ -14,7 +14,7 @@ const {
 } = require('../../../lib/domain/constants')
 
 /**
- * Runs the Users' Repository tests - CRUD + find()
+ * Runs tests
  *
  * Function name to deploy - Firestore.aTestCollection_onUpdate_aFunction
  *
@@ -26,25 +26,26 @@ async function aFunction( // `async` is for explicit returning of Promise
     logger,
     {
         Repos: {
-            UsersRepo,
+            Users,
         },
     },
 ) {
     // WARN: don't bind the `aFunction` function to the `/users` collection to prevent recursion
     // caused by changes in the collection below
 
-    await testUsersRepository({ UsersRepo, logger, })
+    await testUsersRepository({ Users, logger, })
 
     return null
 }
 
-async function testUsersRepository({ UsersRepo: Users, logger, }) {
+/**
+ * Runs the Users' Repository tests = CRUD + find()
+ */
+async function testUsersRepository({ Users, logger, }) {
     const userId = 'abcd1234'
-
-    // Testing the Repository
     const aNewUser = { age: 27, }
-    await Users.setById(userId, aNewUser)
 
+    await Users.setById(userId, aNewUser)
     const userSnap = await Users.getById(userId)
     logger.info(
         'user:', toDoc(userSnap)

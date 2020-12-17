@@ -28,7 +28,7 @@ function initAppCtx({
     })
     const appCtx = makeAppContext({
         Repos: {
-            UsersRepo,
+            Users: UsersRepo,
         },
     })
     return appCtx

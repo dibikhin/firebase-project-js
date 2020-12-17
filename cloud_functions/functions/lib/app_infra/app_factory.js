@@ -1,8 +1,8 @@
 /**
  * @module Infra.App.Bootstrapper
  *
- * It's a Singleton for `FunctionsGroups`. So, multiple calls to `makeApp()`
- * don't lead to multiple underlying Firebase apps.
+ * This module is a Singleton for `FunctionsGroups`. So, multiple calls to `makeApp()`
+ * don't lead to unneeded multiple underlying Firebase apps.
  */
 
 'use strict'
