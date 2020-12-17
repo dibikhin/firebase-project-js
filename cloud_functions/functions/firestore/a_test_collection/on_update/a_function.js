@@ -26,21 +26,28 @@ async function aFunction( // `async` is for explicit returning of Promise
     logger,
     {
         Repos: {
-            UsersRepo: Users,
+            UsersRepo,
         },
     },
 ) {
-    // WARN: don't bind the function to the `/users` collection to prevent recursion
+    // WARN: don't bind the `aFunction` function to the `/users` collection to prevent recursion
     // caused by changes in the collection below
 
+    await testUsersRepository({ UsersRepo, logger, })
+
+    return null
+}
+
+async function testUsersRepository({ UsersRepo: Users, logger, }) {
     const userId = 'abcd1234'
 
+    // Testing the Repository
     const aNewUser = { age: 27, }
     await Users.setById(userId, aNewUser)
 
     const userSnap = await Users.getById(userId)
     logger.info(
-        'user:', toDoc(userSnap),
+        'user:', toDoc(userSnap)
     )
     // An in-place query
     const first99AdultsOrderedByAge = Users
@@ -49,25 +56,25 @@ async function aFunction( // `async` is for explicit returning of Promise
         .limit(99)
     const usersQuerySnapshot = await Users.find(first99AdultsOrderedByAge)
     logger.info(
-        'first99AdultsOrderedByAge - users found:', usersQuerySnapshot.size,
+        'first99AdultsOrderedByAge - users found:', usersQuerySnapshot.size
     )
-    // `Users.first99AdultsOrderedByAge` is from `users_queries.js`
+    // The query `Users.first99AdultsOrderedByAge` is from `users_queries.js`
     const usersQuerySnapshot2 = await Users.find(Users.first99AdultsOrderedByAge)
     // `usersQuerySnapshot.size` should be the same as `usersQuerySnapshot2.size`
     logger.info(
-        'Users.first99AdultsOrderedByAge - users found:', usersQuerySnapshot2.size,
+        'Users.first99AdultsOrderedByAge - users found:', usersQuerySnapshot2.size
     )
     const incrementAgeBy5 = { age: increment(5), }
     await Users.updateById(userId, incrementAgeBy5)
 
     const userSnapUpdated = await Users.getById(userId)
     logger.info(
-        'updated user:', toDoc(userSnapUpdated),
+        'updated user:', toDoc(userSnapUpdated)
     )
     await Users.deleteById(userId)
     const userSnapDeleted = await Users.getById(userId)
     logger.info(
-        'deleted user exists:', userSnapDeleted.exists, // should be `false`
+        'deleted user exists:', userSnapDeleted.exists
     )
     // NOTE: awaited results are ignored because fire-and-forget works for Firestore
     // in general. Firestore client handles a lot by itself by using `grpc`

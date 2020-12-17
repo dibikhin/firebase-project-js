@@ -4,6 +4,9 @@
 
 'use strict'
 
+/**
+ * Composes app context for injection to a function, see params in `a_function.js`
+ */
 function makeAppContext({
     Repos,
 }) {

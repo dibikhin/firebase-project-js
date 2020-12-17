@@ -7,14 +7,21 @@
 module.exports = Object.freeze({
     Collections: {
         users: 'users',
-        /** @deprecated */
         posts: 'posts',
     },
     Fields: {
         users: {
             age: 'age',
-            /** @deprecated */
             state: 'state',
+        },
+    },
+    Values: {
+        UsersStates: {
+            active: 'active',
+            disabled: 'disabled',
+            waiting: 'waiting',
+            /** @deprecated */ // for highlighting in VS Code
+            new: 'new',
         },
     },
 })
