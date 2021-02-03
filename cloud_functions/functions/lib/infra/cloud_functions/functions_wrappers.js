@@ -1,7 +1,8 @@
 /**
  * @module Infra.CloudFunctions.Wrappers
  *
- * Log changes and handle errors on the top level
+ * Log changes and handle errors on the top level.
+ * One can see this as AOP.
  */
 
 'use strict'

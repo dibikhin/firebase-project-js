@@ -22,7 +22,7 @@ const {
  * @param {Object} appCtx
  * @returns {Promise}
  */
-async function aFunction( // `async` is for explicit returning of Promise
+async function aFunction( // `async` is for explicitly returning Promise
     logger,
     {
         Repos: {

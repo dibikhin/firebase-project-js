@@ -26,10 +26,10 @@ function wireFunctionGroup({ aModule, source, firebaseFunctions, }) {
 }
 
 function toCloudFunction({ firebaseFunctions, source, }) {
-    // like `firebaseFunctions
-    //         .firestore
-    //         .document('aTestCollection/{docId}')
-    //         .onUpdate(aTestCollection_onUpdate_aFunction)`
+    // acts like `firebaseFunctions
+    //              .firestore
+    //              .document('aTestCollection/{docId}')
+    //              .onUpdate(aTestCollection_onUpdate_aFunction)`
 
     // Function -> String -> CloudFunction
     return (fn, fnName) => {

@@ -52,7 +52,7 @@ function bootstrapApp({
     // Inject app context to functions for Firestore triggers
     const FirestoreInjected = injectToModuleRight({
         aModule: FirestoreWrapped,
-        dependencies: [{ logger, appCtx, }],
+        dependencies: [{ logger, appCtx, }], // for `function aFunction(logger, appCtx) {...}`
     })
 
     // Final set up of the function group
@@ -64,4 +64,4 @@ function bootstrapApp({
     }
 }
 
-module.exports = once(bootstrapApp) // NOTE "once()"
+module.exports = once(bootstrapApp) // NOTE `once()`
