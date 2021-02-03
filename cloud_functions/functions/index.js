@@ -14,11 +14,11 @@ const firebaseAdmin = require('firebase-admin')
 // The `lib` folder is there to prevent the error:
 // `"code":3,"message":"Function failed on loading user code. ...`
 
-const makeApp = require('./lib/app_infra/app_factory')
+const bootstrapApp = require('./lib/app_infra/app_bootstrapper')
 
 const {
     Firestore,
-} = makeApp({
+} = bootstrapApp({
     firebaseFunctions,
     firebaseAdmin,
     logger: firebaseFunctions.logger,

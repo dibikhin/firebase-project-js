@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "camelize": "^1.0.0",
-    "firebase-admin": "^9.1.1",
-    "firebase-functions": "^3.11.0",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1",
     "flat": "^5.0.2",
     "ramda": "^0.27.1"
   },

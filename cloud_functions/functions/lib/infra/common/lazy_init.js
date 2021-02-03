@@ -1,19 +1,21 @@
 /**
- * @module Infra.Common.InitOnce
+ * @module Infra.Common.LazyInit
  *
- * A naive only once initialization
+ * A naive lazy initialization
  */
 
 'use strict'
 
 /**
+ * Inits only if the target is falsy. Does it lazy
+ *
  * @param {Object} params
  * @param {Function} params.initTarget
  * @param {Object} params.target
  * @returns {Object}
  */
-function initOnce({ initTarget, target, }) {
+function lazyInit({ initTarget, target, }) {
     return target || initTarget()
 }
 
-module.exports = initOnce
+module.exports = lazyInit

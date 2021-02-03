@@ -1,7 +1,7 @@
 /**
  * @module Data.Queries.UsersQueries
  *
- * Queries to run with `await RepoImpl.find(RepoImpl.aQuery)`
+ * Queries to run with like `await RepoImpl.find(RepoImpl.aQuery)`
  */
 
 'use strict'
